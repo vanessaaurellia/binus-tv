@@ -23,20 +23,19 @@
                 var el = this.el;
                 this.setupNamePos();
                 el.addEventListener("mouseenter", function() {
-                target.emit("in"); // animate in
+                    target.emit("in"); 
                 });
                 el.addEventListener("mouseleave", function() {
-                target.emit("out"); // animate out
+                    target.emit("out"); 
                 });
             },
             setupNamePos: function() {
-                var name = this.data.target; // get name element
-                var elPos = this.el.getAttribute("position"); // get the pos of hovered element
+                var name = this.data.target; 
+                var elPos = this.el.getAttribute("position"); 
                 name.setAttribute("position", {
-                //set name position relevant to hovered element
-                x: elPos.x,
-                y: elPos.y + 2,
-                z: elPos.z
+                    x: elPos.x,
+                    y: elPos.y + 0.3,
+                    z: elPos.z
                 });
             }
             });
@@ -64,27 +63,45 @@
                 </a-cursor>
             </a-entity>
 
-            <a-entity
-                id="myTarget"
-                scale="1 .001 1"
-                look-at="#camera"
-                text="color: white;align: center; value: YAYA!; width: 6; wrap-count: 10"
-                animation__1="startEvents: in;property: scale; dur: 200; from: 1 .001 7; to: 1 1 1"
-                animation__2="startEvents: out;property: scale; dur: 200; from: 1 1 1; to: 1 .001 1"
+            <a-entity id="floorDirector" scale="0.1 .001 0.1" rotation="0 90 0" look-at="#camera"
+                text="color: white;align: center; value: Floor Director; width: 6; wrap-count: 10"
+                animation__1="startEvents: in;property: scale; dur: 200; from: 0.1 .001 1; to: 0.1 0.1 0.1"
+                animation__2="startEvents: out;property: scale; dur: 200; from: 0.1 0.1 0.1; to: 0.1 .001 0.1"
+            ></a-entity>
+
+            <a-entity id="controlRoom" scale="0.1 .001 0.1" rotation="0 90 0" look-at="#camera"
+                text="color: white;align: center; value: Control Room; width: 6; wrap-count: 10"
+                animation__1="startEvents: in;property: scale; dur: 200; from: 0.1 .001 1; to: 0.1 0.1 0.1"
+                animation__2="startEvents: out;property: scale; dur: 200; from: 0.1 0.1 0.1; to: 0.1 .001 0.1"
+            ></a-entity>
+
+            <a-entity id="mainRoom" scale="0.1 .001 0.1" rotation="0 90 0" look-at="#camera"
+                text="color: white;align: center; value: Main Room; width: 6; wrap-count: 10"
+                animation__1="startEvents: in;property: scale; dur: 200; from: 0.1 .001 1; to: 0.1 0.1 0.1"
+                animation__2="startEvents: out;property: scale; dur: 200; from: 0.1 0.1 0.1; to: 0.1 .001 0.1"
+            ></a-entity>
+
+            <a-entity id="studioTv" scale="0.5 .001 0.5" rotation="0 280 0" look-at="#camera"
+                text="color: white;align: center; value: Studio TV; width: 6; wrap-count: 10"
+                animation__1="startEvents: in;property: scale; dur: 200; from: 0.1 .001 1; to: 0.1 0.1 0.1"
+                animation__2="startEvents: out;property: scale; dur: 200; from: 0.1 0.1 0.1; to: 0.1 .001 0.1"
             ></a-entity>
 
             <a-entity id="sceneTv">
                 <a-sky src="#tv-studio"></a-sky>
-                <a-sphere onclick="setSceneMain()" position="-3 0 -1.2" rotation="0 90 0" scale="0.2 0.2 0.2" radius="1" color="#FFFFFF" opacity="0" shader="flat" side="double" repeat="1 1" visible="true" class="clickable" animation="property: scale; to: 0.15 0.15 0.15; dur: 2000; easing: linear; elasticity: 400; delay: 0; dir: normal; loop: true; " material="" geometry="">
+
+                <a-sphere id="sceneTv" onclick="setSceneMain()" name-on-hover="target: #mainRoom" position="-3 0 -1.2" rotation="0 90 0" scale="0.2 0.2 0.2" radius="1" color="#FFFFFF" opacity="0" shader="flat" side="double" repeat="1 1" visible="true" look-at="#camera" class="clickable" animation="property: scale; to: 0.15 0.15 0.15; dur: 2000; easing: linear; elasticity: 400; delay: 0; dir: normal; loop: true; " material="" geometry="">
                     <a-image src="assets/img/view.png" z-index="9999;" material="" geometry=""></a-image>
                 </a-sphere>
-    
-                <a-sphere name-on-hover="target: #myTarget" position="-3 -0.3 0.7" rotation="0 90 0" scale="0.2 0.2 0.2" radius="1" color="#FFFFFF" opacity="0" shader="flat" side="double" repeat="1 1" look-at="#camera" visible="true" class="clickable" animation="property: scale; to: 0.15 0.15 0.15; dur: 2000; easing: linear; elasticity: 400; delay: 0; dir: normal; loop: true; " material="" geometry="">
-                    <a-image src="assets/img/view.png" z-index="9999;" material="" geometry=""></a-image>
+
+                <a-sphere id="sceneTv" name-on-hover="target: #floorDirector" position="-3 -0.3 0.7" scale="0.1 0.1 0.1" radius="1" color="#FFFFFF" opacity="1" shader="flat" side="double" repeat="1 1" visible="true" look-at="#camera" animation="property: scale; to: 0.125 0.125 0.125; dur: 2000; easing: linear; elasticity: 400; delay: 0; dir: normal; loop: true;">
                 </a-sphere>
     
-                <a-sphere onclick="setSceneControl()" position="-3 1.3 -2" rotation="0 90 0" scale="0.2 0.2 0.2" radius="1" color="#FFFFFF" opacity="0" shader="flat" side="double" repeat="1 1" visible="true" class="clickable" animation="property: scale; to: 0.15 0.15 0.15; dur: 2000; easing: linear; elasticity: 400; delay: 0; dir: normal; loop: true; " material="" geometry="">
+                <a-sphere id="sceneTv" onclick="setSceneControl()" name-on-hover="target: #controlRoom" position="-3 1.3 -2" rotation="0 90 0" scale="0.2 0.2 0.2" radius="1" color="#FFFFFF" opacity="0" shader="flat" side="double" repeat="1 1" visible="true" look-at="#camera" class="clickable" animation="property: scale; to: 0.15 0.15 0.15; dur: 2000; easing: linear; elasticity: 400; delay: 0; dir: normal; loop: true; " material="" geometry="">
                     <a-image src="assets/img/view.png" z-index="9999;" material="" geometry=""></a-image>
+                </a-sphere>
+
+                <a-sphere id="sceneTv" name-on-hover="target: #studioTv" position="3 0.25 0" scale="0.1 0.1 0.1" radius="1" color="#FFFFFF" opacity="1" shader="flat" side="double" repeat="1 1" visible="true" look-at="#camera" animation="property: scale; to: 0.125 0.125 0.125; dur: 2000; easing: linear; elasticity: 400; delay: 0; dir: normal; loop: true;">
                 </a-sphere>
 
             </a-entity>
@@ -110,6 +127,9 @@
 
             <a-entity id="sceneControl" visible="false">
                 <a-sky src="#control-room"></a-sky>
+
+                <a-sphere id="sceneControl" name-on-hover="target: #studioTv" position="1 0 0" scale="0.1 0.1 0.1" radius="1" color="#FFFFFF" opacity="1" shader="flat" side="double" repeat="1 1" visible="true" look-at="#camera" animation="property: scale; to: 0.125 0.125 0.125; dur: 2000; easing: linear; elasticity: 400; delay: 0; dir: normal; loop: true;">
+                </a-sphere>
             </a-entity>
 
             <a-entity id="sceneEditing" visible="false">
